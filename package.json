@@ -1,0 +1,7 @@
+{
+  "name": "axiom-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "test -d frontend && (cd frontend && npm install && npm run build) || vite build"
+  }
+}
