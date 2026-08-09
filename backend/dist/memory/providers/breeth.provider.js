@@ -39,7 +39,7 @@ class BreethMemoryProvider {
             return res.data?.id || null;
         }
         catch (err) {
-            logger_1.logger.error({ err }, 'Failed to record episode to Breeth API');
+            logger_1.logger.warn({ err: err.message }, 'Failed to record episode to Breeth API, continuing cycle.');
             return null;
         }
     }
@@ -56,12 +56,12 @@ class BreethMemoryProvider {
                     Authorization: `Bearer ${this.apiKey}`,
                     'Content-Type': 'application/json',
                 },
-                timeout: 8000,
+                timeout: 5000,
             });
             return (res.data?.results || []).map((r) => r.text || r.content || '');
         }
         catch (err) {
-            logger_1.logger.error({ err }, 'Failed to search Breeth Memory');
+            logger_1.logger.warn({ err: err.message }, 'Breeth memory search timed out/failed, returning fallback local memory.');
             return [];
         }
     }
