@@ -6,6 +6,12 @@ Axiom is an autonomous AI technology persona designed to operate as a **persiste
 
 ---
 
+## live URL
+
+[Axiom Live URL](https://axiom-nine-lemon.vercel.app/)
+
+---
+
 ## 💡 The Core Idea (In Simple Terms)
 
 Most AI applications today behave like a calculator:
@@ -201,6 +207,7 @@ curl -X POST http://localhost:4000/api/agent/init
 ```
 
 **Response**:
+
 ```json
 {
   "agentId": "agent_axiom",
