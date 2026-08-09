@@ -1,5 +1,7 @@
 FROM node:20-alpine AS builder
 
+RUN apk add --no-cache openssl
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -13,6 +15,8 @@ RUN chmod -R +x node_modules/.bin && node ./node_modules/prisma/build/index.js g
 RUN node ./node_modules/typescript/bin/tsc
 
 FROM node:20-alpine AS runner
+
+RUN apk add --no-cache openssl
 
 WORKDIR /app
 
