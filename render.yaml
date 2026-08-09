@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: axiom-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: AGENT_ID
+        value: agent_axiom
+      - key: DISCOVERY_INTERVAL_MINUTES
+        value: 30
+      - key: MIN_PUBLISH_INTERVAL_MINUTES
+        value: 90
+      - key: MAX_POSTS_PER_24H
+        value: 8
+      - key: MOCK_SOURCES_ENABLED
+        value: false
