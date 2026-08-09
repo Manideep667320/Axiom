@@ -4,7 +4,7 @@
   "description": "Axiom - Autonomous AI Systems Analyst Backend Service",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
+    "build": "prisma generate",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "db:migrate": "prisma migrate dev",
