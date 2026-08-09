@@ -1,5 +1,5 @@
 {
-  "buildCommand": "test -d frontend && (cd frontend && npm install && npm run build) || (npm install && npm run build)",
+  "buildCommand": "vite build",
   "outputDirectory": "dist",
   "rewrites": [
     {
