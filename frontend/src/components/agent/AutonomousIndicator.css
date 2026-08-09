@@ -1,0 +1,51 @@
+.autonomous-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--ax-surface);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.autonomous-indicator--active {
+  border-color: var(--ax-amber);
+  box-shadow: var(--shadow-glow-amber);
+}
+
+.autonomous-indicator__dot-wrapper {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+
+.autonomous-indicator__dot {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: var(--ax-slate);
+}
+
+.autonomous-indicator__dot--pulse {
+  background: var(--ax-amber);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.autonomous-indicator__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.autonomous-indicator__label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--ax-ink);
+  letter-spacing: 0.02em;
+}
+
+.autonomous-indicator__uptime {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: var(--ax-slate);
+}

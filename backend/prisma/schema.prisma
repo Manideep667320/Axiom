@@ -1,0 +1,222 @@
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgvector(map: "vector")]
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+enum SourceType {
+  rss
+  official_blog
+  github
+  arxiv
+  hacker_news
+}
+
+enum JobState {
+  DISCOVERED
+  EVALUATING
+  REJECTED
+  ACCEPTED
+  MEMORY_RETRIEVAL
+  PLANNING
+  GENERATING
+  VALIDATING
+  SCHEDULED
+  PUBLISHED
+  FAILED
+}
+
+enum DecisionAction {
+  publish_now
+  queue
+  monitor
+  merge
+  skip
+  reject
+}
+
+model Persona {
+  id                  String   @id @default(uuid())
+  name                String   @default("Axiom")
+  role                String   @default("Autonomous AI Systems Analyst")
+  mission             String
+  editorialPosition   String
+  coreInterests       String[]
+  editorialPrinciples String[]
+  avoidTopics         String[]
+  version             Int      @default(1)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  agents              Agent[]
+}
+
+model Agent {
+  id                 String              @id @default("agent_axiom")
+  name               String              @default("Axiom")
+  personaId          String
+  persona            Persona             @relation(fields: [personaId], references: [id])
+  status             String              @default("stopped") // running, stopped, error
+  isAutonomous       Boolean             @default(true)
+  initializedAt      DateTime?
+  lastActiveAt       DateTime?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  topics             Topic[]
+  editorialDecisions EditorialDecision[]
+  posts              Post[]
+  agentRuns          AgentRun[]
+  agentState         AgentState?
+  schedulerState     SchedulerState?
+}
+
+model Source {
+  id          String       @id @default(uuid())
+  name        String
+  type        SourceType
+  url         String       @unique
+  tier        Int          @default(1) // 1: Primary, 2: Technical, 3: Community
+  active      Boolean      @default(true)
+  lastFetched DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  topics      Topic[]
+  postSources PostSource[]
+}
+
+model Topic {
+  id                 String             @id @default(uuid())
+  agentId            String
+  agent              Agent              @relation(fields: [agentId], references: [id])
+  sourceId           String
+  source             Source             @relation(fields: [sourceId], references: [id])
+  title              String
+  summary            String
+  url                String
+  canonicalUrl       String
+  contentHash        String
+  fingerprint        String
+  sourceType         SourceType
+  rawContent         String?
+  jobState           JobState           @default(DISCOVERED)
+  publishedAt        DateTime?
+  discoveredAt       DateTime           @default(now())
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  editorialDecisions EditorialDecision[]
+  posts              Post[]
+  embeddings         Embedding[]
+
+  @@unique([canonicalUrl, contentHash])
+}
+
+model EditorialDecision {
+  id                      String         @id @default(uuid())
+  agentId                 String
+  agent                   Agent          @relation(fields: [agentId], references: [id])
+  topicId                 String
+  topic                   Topic          @relation(fields: [topicId], references: [id])
+  passedHardGates         Boolean
+  rejectionReason         String?
+  action                  DecisionAction
+  overallScore            Float
+  relevanceScore          Float
+  noveltyScore            Float
+  technicalDepthScore     Float
+  impactScore             Float
+  credibilityScore        Float
+  narrativeContinuityScore Float
+  rationale               Json           // whySelected, whyRelevantNow, etc.
+  createdAt               DateTime       @default(now())
+}
+
+model Post {
+  id              String       @id @default(uuid())
+  agentId         String
+  agent           Agent        @relation(fields: [agentId], references: [id])
+  topicId         String
+  topic           Topic        @relation(fields: [topicId], references: [id])
+  idempotencyKey  String       @unique
+  content         String
+  perspective     String
+  keyClaims       String[]
+  rationale       Json         // rationale output
+  publishedAt     DateTime     @default(now())
+  createdAt       DateTime     @default(now())
+  postSources     PostSource[]
+  embeddings      Embedding[]
+}
+
+model PostSource {
+  id        String   @id @default(uuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  sourceId  String
+  source    Source   @relation(fields: [sourceId], references: [id])
+  title     String
+  url       String
+  createdAt DateTime @default(now())
+}
+
+model Embedding {
+  id        String                  @id @default(uuid())
+  topicId   String?
+  topic     Topic?                  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  postId    String?
+  post      Post?                   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  vector    Unsupported("vector")?
+  content   String
+  metadata  Json
+  createdAt DateTime                @default(now())
+}
+
+model Narrative {
+  id             String   @id @default(uuid())
+  theme          String   @unique
+  editorialStance String
+  firstMentioned DateTime @default(now())
+  lastMentioned  DateTime @updatedAt
+  confidence     Float    @default(0.8)
+  supportingPosts String[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model AgentRun {
+  id                String   @id @default(uuid())
+  agentId           String
+  agent             Agent    @relation(fields: [agentId], references: [id])
+  startedAt         DateTime @default(now())
+  completedAt       DateTime?
+  status            String   @default("running") // running, completed, failed
+  topicsDiscovered  Int      @default(0)
+  topicsRejected    Int      @default(0)
+  topicsAccepted    Int      @default(0)
+  postsPublished    Int      @default(0)
+  errorMessage      String?
+}
+
+model AgentState {
+  id              String   @id @default(uuid())
+  agentId         String   @unique
+  agent           Agent    @relation(fields: [agentId], references: [id])
+  activeJobId     String?
+  activeTopicId   String?
+  failureCount    Int      @default(0)
+  lastSuccessfulRun DateTime?
+  updatedAt       DateTime @updatedAt
+}
+
+model SchedulerState {
+  id               String   @id @default(uuid())
+  agentId          String   @unique
+  agent            Agent    @relation(fields: [agentId], references: [id])
+  lastPublishedAt  DateTime?
+  postsInLast24h   Int      @default(0)
+  nextCycleScheduledAt DateTime?
+  updatedAt        DateTime @updatedAt
+}

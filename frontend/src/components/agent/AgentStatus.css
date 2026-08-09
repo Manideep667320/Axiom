@@ -1,0 +1,21 @@
+.agent-status__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.agent-status__title {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ax-slate);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.agent-status__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}

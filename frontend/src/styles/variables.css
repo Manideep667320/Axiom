@@ -1,0 +1,123 @@
+/* ═══════════════════════════════════════════════════════
+   AXIOM — Design System Variables
+   "The Editor's Desk" — Warm Editorial Palette
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Core Palette ── */
+  --ax-ink:              #1a1410;
+  --ax-paper:            #f7f3ee;
+  --ax-surface:          #efe9e0;
+  --ax-surface-raised:   #e8e0d4;
+  --ax-ivory:            #faf8f5;
+
+  /* ── Accent Colors ── */
+  --ax-amber:            #c8842e;
+  --ax-amber-soft:       #e8b86d;
+  --ax-amber-faint:      rgba(200, 132, 46, 0.10);
+  --ax-terracotta:       #b85c3a;
+  --ax-terracotta-faint: rgba(184, 92, 58, 0.10);
+  --ax-sage:             #5a7a5e;
+  --ax-sage-faint:       rgba(90, 122, 94, 0.10);
+
+  /* ── Neutrals ── */
+  --ax-slate:            #6b6560;
+  --ax-charcoal:         #2d2824;
+  --ax-smoke:            #d4cdc4;
+  --ax-smoke-light:      #e2ddd6;
+
+  /* ── Typography ── */
+  --font-serif:          'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans:           'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:           'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  --text-xs:             0.75rem;
+  --text-sm:             0.8125rem;
+  --text-base:           0.9375rem;
+  --text-lg:             1.125rem;
+  --text-xl:             1.375rem;
+  --text-2xl:            1.75rem;
+  --text-3xl:            2.25rem;
+
+  --leading-tight:       1.25;
+  --leading-normal:      1.6;
+  --leading-relaxed:     1.75;
+
+  /* ── Spacing ── */
+  --space-1:             0.25rem;
+  --space-2:             0.5rem;
+  --space-3:             0.75rem;
+  --space-4:             1rem;
+  --space-5:             1.25rem;
+  --space-6:             1.5rem;
+  --space-8:             2rem;
+  --space-10:            2.5rem;
+  --space-12:            3rem;
+  --space-16:            4rem;
+
+  /* ── Borders & Radius ── */
+  --radius-sm:           4px;
+  --radius-md:           8px;
+  --radius-lg:           12px;
+  --radius-xl:           16px;
+  --radius-full:         9999px;
+  --border-width:        1px;
+  --border-color:        var(--ax-smoke);
+
+  /* ── Shadows ── */
+  --shadow-xs:           0 1px 2px rgba(26, 20, 16, 0.04);
+  --shadow-sm:           0 1px 3px rgba(26, 20, 16, 0.06), 0 1px 2px rgba(26, 20, 16, 0.04);
+  --shadow-md:           0 4px 12px rgba(26, 20, 16, 0.08), 0 1px 3px rgba(26, 20, 16, 0.04);
+  --shadow-lg:           0 8px 24px rgba(26, 20, 16, 0.10), 0 2px 6px rgba(26, 20, 16, 0.04);
+  --shadow-glow-amber:   0 0 20px rgba(200, 132, 46, 0.15);
+
+  /* ── Transitions ── */
+  --ease-out:            cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:         cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast:       120ms;
+  --duration-normal:     200ms;
+  --duration-slow:       350ms;
+
+  /* ── Layout ── */
+  --sidebar-width:       240px;
+  --sidebar-collapsed:   64px;
+  --header-height:       56px;
+  --content-max-width:   1200px;
+
+  /* ── Z-index ── */
+  --z-sidebar:           100;
+  --z-header:            200;
+  --z-overlay:           300;
+  --z-modal:             400;
+  --z-toast:             500;
+}
+
+/* ── Dark Mode ── */
+[data-theme="dark"] {
+  --ax-ink:              #ede8e0;
+  --ax-paper:            #141210;
+  --ax-surface:          #1e1b18;
+  --ax-surface-raised:   #2a2622;
+  --ax-ivory:            #1a1714;
+
+  --ax-amber:            #d9963f;
+  --ax-amber-soft:       #c8842e;
+  --ax-amber-faint:      rgba(217, 150, 63, 0.12);
+  --ax-terracotta:       #d0714f;
+  --ax-terracotta-faint: rgba(208, 113, 79, 0.12);
+  --ax-sage:             #6f9473;
+  --ax-sage-faint:       rgba(111, 148, 115, 0.12);
+
+  --ax-slate:            #9a9490;
+  --ax-charcoal:         #0e0c0a;
+  --ax-smoke:            #332f2a;
+  --ax-smoke-light:      #2a2622;
+
+  --border-color:        var(--ax-smoke);
+
+  --shadow-xs:           0 1px 2px rgba(0, 0, 0, 0.20);
+  --shadow-sm:           0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+  --shadow-md:           0 4px 12px rgba(0, 0, 0, 0.30), 0 1px 3px rgba(0, 0, 0, 0.15);
+  --shadow-lg:           0 8px 24px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.15);
+  --shadow-glow-amber:   0 0 24px rgba(217, 150, 63, 0.20);
+}

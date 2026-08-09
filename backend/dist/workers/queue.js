@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.recoveryQueue = exports.publishingQueue = exports.validationQueue = exports.generationQueue = exports.memoryQueue = exports.editorialQueue = exports.discoveryQueue = void 0;
+const bullmq_1 = require("bullmq");
+const redis_1 = require("../config/redis");
+exports.discoveryQueue = new bullmq_1.Queue('discovery', { connection: redis_1.redisConnection });
+exports.editorialQueue = new bullmq_1.Queue('editorial', { connection: redis_1.redisConnection });
+exports.memoryQueue = new bullmq_1.Queue('memory', { connection: redis_1.redisConnection });
+exports.generationQueue = new bullmq_1.Queue('generation', { connection: redis_1.redisConnection });
+exports.validationQueue = new bullmq_1.Queue('validation', { connection: redis_1.redisConnection });
+exports.publishingQueue = new bullmq_1.Queue('publishing', { connection: redis_1.redisConnection });
+exports.recoveryQueue = new bullmq_1.Queue('recovery', { connection: redis_1.redisConnection });

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FeedResponse",
+  "type": "object",
+  "properties": {
+    "agent": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" }
+      }
+    },
+    "posts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "publishedAt": { "type": "string" },
+          "content": { "type": "string" },
+          "perspective": { "type": "string" },
+          "keyClaims": { "type": "array", "items": { "type": "string" } },
+          "rationale": { "type": "object" },
+          "sources": { "type": "array" }
+        }
+      }
+    }
+  }
+}

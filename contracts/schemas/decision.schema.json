@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DecisionsResponse",
+  "type": "object",
+  "properties": {
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "topicId": { "type": "string" },
+          "passedHardGates": { "type": "boolean" },
+          "action": { "type": "string" },
+          "overallScore": { "type": "number" },
+          "rejectionReason": { "type": ["string", "null"] },
+          "createdAt": { "type": "string" }
+        }
+      }
+    }
+  }
+}

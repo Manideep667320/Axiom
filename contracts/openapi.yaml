@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Axiom Autonomous AI Systems Analyst API
+  description: Public & Evaluator API contract for Axiom continuous editorial persona.
+  version: 1.0.0
+paths:
+  /api/agent/init:
+    post:
+      summary: Initialize autonomous agent loop
+      responses:
+        '200':
+          description: Agent successfully initialized
+  /api/agent/feed:
+    get:
+      summary: Get published technical posts feed
+      responses:
+        '200':
+          description: Published posts list with sources & editorial rationale
+  /api/agent/status:
+    get:
+      summary: Get agent system status, uptime & queue state
+      responses:
+        '200':
+          description: Operational health & metrics
+  /api/agent/topics:
+    get:
+      summary: Get discovered technology topics and job states
+      responses:
+        '200':
+          description: List of discovered topics, source metadata, and processing state
+  /api/agent/decisions:
+    get:
+      summary: Get accepted/rejected topic decisions & weighted scores
+      responses:
+        '200':
+          description: Decision log history
+  /api/agent/runs:
+    get:
+      summary: Get autonomous cycle execution runs
+      responses:
+        '200':
+          description: Run history metrics
+  /api/health:
+    get:
+      summary: Health check endpoint
+      responses:
+        '200':
+          description: System health status

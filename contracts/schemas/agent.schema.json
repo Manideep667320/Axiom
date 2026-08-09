@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AgentInitResponse",
+  "type": "object",
+  "properties": {
+    "agentId": { "type": "string" },
+    "status": { "type": "string" },
+    "autonomous": { "type": "boolean" },
+    "initializedAt": { "type": "string", "format": "date-time" }
+  },
+  "required": ["agentId", "status", "autonomous", "initializedAt"]
+}

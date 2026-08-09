@@ -1,0 +1,30 @@
+.decision-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.decision-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.decision-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.decision-card__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--ax-ink);
+}
+
+.decision-card__reason {
+  font-size: var(--text-sm);
+  color: var(--ax-slate);
+  line-height: var(--leading-relaxed);
+}

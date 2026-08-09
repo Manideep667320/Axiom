@@ -1,0 +1,45 @@
+.topic-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.topic-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topic-card__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.topic-card__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--ax-ink);
+}
+
+.topic-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.topic-card__title a:hover {
+  color: var(--ax-amber);
+}
+
+.topic-card__summary {
+  font-size: var(--text-sm);
+  color: var(--ax-slate);
+  line-height: var(--leading-relaxed);
+}
